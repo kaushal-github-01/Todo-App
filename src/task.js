@@ -57,6 +57,25 @@ const taskControl = (tasks) => {
       submitButton.style.display = "none";
     });
   });
+
+  const deleteButton = main.querySelectorAll("button[type='delete']");
+  deleteButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      console.log(
+        button,
+        index,
+        tasks[index].name,
+        typeof tasks[index],
+        typeof tasks,
+        tasks
+      );
+
+      tasks.splice(index, 1);
+      let tasksString = JSON.stringify(tasks);
+      localStorage.setItem("tasks", tasksString);
+      window.location.reload();
+    });
+  });
 };
 
 export default taskControl;
