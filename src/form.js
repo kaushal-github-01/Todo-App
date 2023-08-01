@@ -33,14 +33,14 @@ const formControl = () => {
         <h2>${task.name}</h2>
       </div>
       <div>
-        <button>View</button>
-        <button>Edit</button>
-        <button>Delete</button>
+        <button type='view'>View</button>
+        <button type='edit'>Edit</button>
+        <button type='delete'>Delete</button>
       </div>
     </div>
     `;
   });
-  taskControl();
+  taskControl(tasks);
 
   cancelButton.addEventListener("click", (e) => {
     e.preventDefault();
