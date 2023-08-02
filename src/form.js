@@ -1,4 +1,5 @@
 import taskControl from "./task";
+import categoryControl from "./category";
 
 const formControl = () => {
   const main = document.querySelector("main");
@@ -54,7 +55,9 @@ const formControl = () => {
     </div>
     `;
   });
+
   taskControl(tasks);
+  categoryControl(tasks);
 
   cancelButton.addEventListener("click", (e) => {
     e.preventDefault();
