@@ -3,6 +3,7 @@ import taskControl from "./task";
 const formControl = () => {
   const main = document.querySelector("main");
   const submitButton = formDiv.querySelector("button[type='submit']");
+  const updateButton = formDiv.querySelector("button[type='update']");
   const cancelButton = formDiv.querySelector("button[type='cancel']");
 
   submitButton.addEventListener("click", (e) => {
@@ -16,12 +17,26 @@ const formControl = () => {
       category: formDiv.querySelector("select").value,
     };
 
-    tasks.push(task);
-    let tasksString = JSON.stringify(tasks);
-    localStorage.setItem("tasks", tasksString);
+    let taskPresent = main.querySelectorAll("h2") || [];
+    let newTask = true;
+    if (taskPresent.length != 0) {
+      taskPresent.forEach((element) => {
+        if (element.textContent == task.name) {
+          newTask = false;
+        }
+      });
+    }
 
-    formDiv.style.display = "none";
-    window.location.reload();
+    if (newTask == true) {
+      tasks.push(task);
+      let tasksString = JSON.stringify(tasks);
+      localStorage.setItem("tasks", tasksString);
+
+      formDiv.style.display = "none";
+      window.location.reload();
+    } else {
+      alert("Task already present");
+    }
   });
 
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -41,6 +56,15 @@ const formControl = () => {
     `;
   });
   taskControl(tasks);
+
+  updateButton.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    let taskName = formDiv.querySelector("input[type='text']").value;
+    console.log(tasks.findIndex((obj) => obj.name == taskName));
+
+    // formDiv.style.display = "none";
+  });
 
   cancelButton.addEventListener("click", (e) => {
     e.preventDefault();

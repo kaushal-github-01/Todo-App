@@ -5,7 +5,7 @@ const taskControl = (tasks) => {
   const checkbox = main.querySelectorAll("input");
   checkbox.forEach((checkBox, index) => {
     const taskHeading = checkBox.nextElementSibling;
-    const localStorageKey = `task_${index}`;
+    const localStorageKey = tasks[index].name;
 
     const isChecked = localStorage.getItem(localStorageKey) === "Yes";
     if (isChecked) {
@@ -30,8 +30,6 @@ const taskControl = (tasks) => {
   const viewButton = main.querySelectorAll("button[type='view']");
   viewButton.forEach((button, index) => {
     button.addEventListener("click", () => {
-      console.log(button, index, tasks[index].name, tasks[index].category);
-
       formDiv.children[0].reset();
       formDiv.style.display = "flex";
 
@@ -58,18 +56,41 @@ const taskControl = (tasks) => {
     });
   });
 
+  const editButton = main.querySelectorAll("button[type='edit']");
+  editButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      formDiv.children[0].reset();
+      formDiv.style.display = "flex";
+
+      const taskName = formDiv.querySelector("input[type='text']");
+      const taskDescription = formDiv.querySelector("textarea");
+      const taskDate = formDiv.querySelector("input[type='date']");
+      const taskTime = formDiv.querySelector("input[type='time']");
+      const taskCategory = formDiv.querySelector("select");
+
+      taskName.value = tasks[index].name;
+      taskDescription.value = tasks[index].description;
+      taskDate.value = tasks[index].date;
+      taskTime.value = tasks[index].time;
+      taskCategory.value = tasks[index].category;
+
+      taskName.disabled = false;
+      taskDescription.disabled = false;
+      taskDate.disabled = false;
+      taskTime.disabled = false;
+      taskCategory.disabled = false;
+
+      const submitButton = formDiv.querySelector("button[type='submit']");
+      submitButton.style.display = "none";
+
+      const updateButton = formDiv.querySelector("button[type='update']");
+      updateButton.style.display = "inline-block";
+    });
+  });
+
   const deleteButton = main.querySelectorAll("button[type='delete']");
   deleteButton.forEach((button, index) => {
     button.addEventListener("click", () => {
-      console.log(
-        button,
-        index,
-        tasks[index].name,
-        typeof tasks[index],
-        typeof tasks,
-        tasks
-      );
-
       tasks.splice(index, 1);
       let tasksString = JSON.stringify(tasks);
       localStorage.setItem("tasks", tasksString);
