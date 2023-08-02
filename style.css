@@ -94,6 +94,11 @@ form button[type="submit"] {
   margin-bottom: 15px;
 }
 
+form button[type="update"] {
+  display: none;
+  margin-bottom: 15px;
+}
+
 /* Main Section */
 
 main {
