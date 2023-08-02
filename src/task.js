@@ -85,6 +85,27 @@ const taskControl = (tasks) => {
 
       const updateButton = formDiv.querySelector("button[type='update']");
       updateButton.style.display = "inline-block";
+      updateButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        let taskIndex = tasks.findIndex((obj) => obj.name == taskName.value);
+        tasks.splice(taskIndex, 1);
+
+        let task = {
+          name: formDiv.querySelector("input[type='text']").value,
+          description: formDiv.querySelector("textarea").value,
+          date: formDiv.querySelector("input[type='date']").value,
+          time: formDiv.querySelector("input[type='time']").value,
+          category: formDiv.querySelector("select").value,
+        };
+
+        tasks.push(task);
+        let tasksString = JSON.stringify(tasks);
+        localStorage.setItem("tasks", tasksString);
+
+        formDiv.style.display = "none";
+        window.location.reload();
+      });
     });
   });
 
