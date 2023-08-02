@@ -8,8 +8,8 @@ nav {
   height: 100vh;
   width: 20%;
   display: flex;
-  justify-content: center;
-  align-items: start;
+  flex-direction: column;
+  align-items: center;
   position: fixed;
   background-color: aquamarine;
 }
@@ -25,6 +25,15 @@ nav button {
 nav button:hover {
   cursor: pointer;
   background-color: aquamarine;
+}
+
+nav select {
+  width: 90%;
+  margin-top: 30px;
+  padding: 7px 10px;
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: white;
 }
 
 /* Form  */
