@@ -5,7 +5,7 @@ const categoryControl = (tasks) => {
   categoryDisplay.addEventListener("change", () => {
     localStorage.setItem("currentCategory", `${categoryDisplay.value}`);
 
-    let currentCategory = categoryDisplay.value;
+    currentCategory = categoryDisplay.value;
     let matchedTaskName = [];
     tasks.forEach((task) => {
       if (task.category == currentCategory) {
@@ -28,9 +28,9 @@ const categoryControl = (tasks) => {
     }
   });
 
-  categoryDisplay.value = localStorage.getItem("currentCategory");
+  categoryDisplay.value = localStorage.getItem("currentCategory") || "All";
 
-  let currentCategory = localStorage.getItem("currentCategory");
+  let currentCategory = localStorage.getItem("currentCategory") || "All";
   let matchedTaskName = [];
   tasks.forEach((task) => {
     if (task.category == currentCategory) {
