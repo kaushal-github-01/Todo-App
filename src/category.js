@@ -4,43 +4,31 @@ const categoryControl = (tasks) => {
 
   categoryDisplay.addEventListener("change", () => {
     localStorage.setItem("currentCategory", `${categoryDisplay.value}`);
-
-    currentCategory = categoryDisplay.value;
-    let matchedTaskName = [];
-    tasks.forEach((task) => {
-      if (task.category == currentCategory) {
-        matchedTaskName.push(task.name);
-      }
-    });
-
-    for (let i = 0; i < tasks.length; i++) {
-      if (matchedTaskName.length == 0) {
-        main.children[i].style.display = "flex";
-      } else {
-        main.children[i].style.display = "none";
-        let taskHeading = main.children[i].querySelector("h2").textContent;
-        matchedTaskName.forEach((matchedName) => {
-          if (matchedName == taskHeading) {
-            main.children[i].style.display = "flex";
-          }
-        });
-      }
-    }
+    window.location.reload();
   });
 
   categoryDisplay.value = localStorage.getItem("currentCategory") || "All";
 
   let currentCategory = localStorage.getItem("currentCategory") || "All";
+  console.log(currentCategory);
   let matchedTaskName = [];
   tasks.forEach((task) => {
+    console.log(task);
     if (task.category == currentCategory) {
       matchedTaskName.push(task.name);
     }
   });
 
+  console.log(matchedTaskName, matchedTaskName.length);
+  console.log(tasks.length);
   for (let i = 0; i < tasks.length; i++) {
     if (matchedTaskName.length == 0) {
-      main.children[i].style.display = "flex";
+      console.log(tasks[i].category);
+      if (currentCategory == "All") {
+        main.children[i].style.display = "flex";
+      } else {
+        main.children[i].style.display = "none";
+      }
     } else {
       main.children[i].style.display = "none";
       let taskHeading = main.children[i].querySelector("h2").textContent;
